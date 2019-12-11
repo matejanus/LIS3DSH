@@ -20,9 +20,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "spiDriver.h"
 #include "gpio.h"
-#include <stdbool.h>
+#include "LIS3DSH.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 
