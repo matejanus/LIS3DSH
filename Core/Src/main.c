@@ -20,11 +20,13 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "usart.h"
 #include "gpio.h"
-#include "LIS3DSH.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "LIS3DSH.h"
+#include <string.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -87,7 +89,11 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_USART2_UART_Init();
+  /* USER CODE BEGIN 2 */
   LIS3DSH_init();
+  /* USER CODE END 2 */
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 	while (1) {
@@ -100,6 +106,15 @@ int main(void)
 		data = LIS3DSH_check_sensor();
 		LIS3DSH_READ_DATA(&d);
 		HAL_Delay(300);
+
+//		float x = d.X * 4.0f / 32678.0f;
+//		float y = d.Y * 4.0f / 32678.0f;
+//		float z = d.Z * 4.0f / 32678.0f;
+		char buffer[100] = {0};
+		sprintf(buffer, "X: %i\r\n Y: %i\r\n Z: %i\r\n", d.X,d.Y,d.Z);
+		HAL_UART_Transmit(&huart2, &buffer, sizeof(buffer), 1000);
+
+
 	}
   /* USER CODE END 3 */
 }

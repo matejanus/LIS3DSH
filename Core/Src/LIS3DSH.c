@@ -43,7 +43,7 @@ bool LIS3DSH_check_sensor()
 }
 
 void LIS3DSH_READ_DATA(DATA_FROM_AXES_LIS3DSH_t *DATA_FROM_AXCES_STRUCT) {
-   int8_t buffer[6] = {0};
+   uint8_t buffer[6] = {0};
    spiReadReg(LIS3DSH_OUT_X_L, &buffer[0], 1);
    spiReadReg(LIS3DSH_OUT_X_H, &buffer[1], 1);
    spiReadReg(LIS3DSH_OUT_Y_L, &buffer[2], 1);
@@ -54,8 +54,5 @@ void LIS3DSH_READ_DATA(DATA_FROM_AXES_LIS3DSH_t *DATA_FROM_AXCES_STRUCT) {
    DATA_FROM_AXCES_STRUCT->X = (int16_t)((buffer[1] << 8) + buffer[0]) * LIS3DSH_SENSI_0_12G;
    DATA_FROM_AXCES_STRUCT->Y = (int16_t)((buffer[3] << 8) + buffer[2]) * LIS3DSH_SENSI_0_12G;
    DATA_FROM_AXCES_STRUCT->Z = (int16_t)((buffer[5] << 8) + buffer[4]) * LIS3DSH_SENSI_0_12G;
-
-
-   int i = 0;
 }
 
