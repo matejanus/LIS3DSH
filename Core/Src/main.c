@@ -25,7 +25,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "LIS3DSH.h"
-#include <string.h>
+#include <stdio.h>
 #include "SerialLogger.h"
 /* USER CODE END Includes */
 
@@ -112,7 +112,7 @@ int main(void)
 //		float z = d.Z * 4.0f / 32678.0f;
 		char buffer[100] = {0};
 		sprintf(buffer, "X: %i\r\n Y: %i\r\n Z: %i\r\n", d.X,d.Y,d.Z);
-		logData("test");
+		logData(buffer);
 //		HAL_UART_Transmit(&huart2, &buffer, sizeof(buffer), 1000);
 
 
