@@ -69,17 +69,6 @@ bool spiWriteByte(uint8_t spiRegisterAddress, uint8_t data) {
 	return spiWriteReg(spiRegisterAddress, &val, 1);
 }
 
-//bool spiReadWrite(uint8_t spiRegisterAddress, uint8_t RxBuffer[], uint16_t len){
-//	uint8_t reg = spiRegisterAddress | 0x80;
-//	uint8_t tempBuffer[len];
-//	size_t n = sizeof(RxBuffer)/sizeof(RxBuffer[0]);
-//	HAL_GPIO_WritePin(CS_I2C_SPI_GPIO_Port, CS_I2C_SPI_Pin, GPIO_PIN_RESET);
-//	bool status = HAL_SPI_TransmitReceive(&hspi, &reg, tempBuffer, 1 + len, 1000); //length of addres + buffer length
-//	memcpy(RxBuffer, tempBuffer + 1,len);
-//	HAL_GPIO_WritePin(CS_I2C_SPI_GPIO_Port, CS_I2C_SPI_Pin, GPIO_PIN_SET);
-//	return status;
-//}
-
 bool spiReadWrite(uint8_t TxBuffer[], uint16_t TxBufferLen, uint8_t RxBuffer[], uint16_t RxBufferLen){
 	uint8_t tempBuffer[TxBufferLen + RxBufferLen];
 	memset(tempBuffer, 0, TxBufferLen + RxBufferLen);
