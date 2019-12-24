@@ -20,13 +20,13 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
-#include "usart.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "LIS3DSH.h"
 #include <string.h>
+#include "SerialLogger.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -89,9 +89,9 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   LIS3DSH_init();
+  initSerialLogger();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -112,7 +112,8 @@ int main(void)
 //		float z = d.Z * 4.0f / 32678.0f;
 		char buffer[100] = {0};
 		sprintf(buffer, "X: %i\r\n Y: %i\r\n Z: %i\r\n", d.X,d.Y,d.Z);
-		HAL_UART_Transmit(&huart2, &buffer, sizeof(buffer), 1000);
+		logData("test");
+//		HAL_UART_Transmit(&huart2, &buffer, sizeof(buffer), 1000);
 
 
 	}
