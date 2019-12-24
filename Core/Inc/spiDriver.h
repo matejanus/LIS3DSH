@@ -26,3 +26,6 @@ bool spiWriteReg(uint8_t spiRegisterAddress, uint8_t* data, uint16_t len);
 
 bool spiWriteByte(uint8_t spiRegisterAddress, uint8_t data);
 
+bool spiReadWrite(uint8_t TxBuffer[], uint16_t TxBufferLen, uint8_t RxBuffer[], uint16_t RxBufferLen);
+
+bool spiReadWriteByte(uint8_t spiRegisterAddress, uint8_t data[], uint16_t len);
