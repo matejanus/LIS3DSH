@@ -23,7 +23,7 @@ void spiDriverInit() {
 	GPIO_InitStruct.Pin = SPI1_SCK_Pin | SPI1_MISO_Pin | SPI1_MOSI_Pin;
 	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
-	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+	 GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
 	GPIO_InitStruct.Alternate = GPIO_AF5_SPI1;
 	HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
@@ -34,7 +34,7 @@ void spiDriverInit() {
 	hspi.Init.CLKPolarity = SPI_POLARITY_LOW;
 	hspi.Init.CLKPhase = SPI_PHASE_1EDGE;
 	hspi.Init.NSS = SPI_NSS_SOFT;
-	hspi.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_8;
+	hspi.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_128;
 	hspi.Init.FirstBit = SPI_FIRSTBIT_MSB;
 	hspi.Init.TIMode = SPI_TIMODE_DISABLE;
 	hspi.Init.CRCCalculation = SPI_CRCCALCULATION_DISABLE;
@@ -54,7 +54,7 @@ bool spiReadReg(uint8_t spiRegisterAddress, uint8_t data[], uint16_t len) {
 	return tmp == HAL_OK;
 }
 
-bool spiWriteReg(uint8_t spiRegisterAddress, uint8_t* data, uint16_t len) {
+bool spiWriteReg(uint8_t spiRegisterAddress, uint8_t *data, uint16_t len) {
 	HAL_GPIO_WritePin(CS_I2C_SPI_GPIO_Port, CS_I2C_SPI_Pin, GPIO_PIN_RESET);
 	uint8_t adddress = spiRegisterAddress;
 	HAL_SPI_Transmit(&hspi, &adddress, 1, 1000);
